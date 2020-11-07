@@ -5,7 +5,7 @@
 This repo is a workshop designed for MataHacks 2020
 
 # Content
-1. [Requirements].(#Requirements)
+1. [Requirements](#Requirements)
 
 # Requirements
 Feel free to do this in Python or your favorite language, or just use https://regex101.com
