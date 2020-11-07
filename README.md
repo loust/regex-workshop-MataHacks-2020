@@ -57,3 +57,16 @@ From the regex search above:
 )
 ```
 We can see that `\w` is used. This is basically doing the same thing as `[a-zA-Z]` it is a shortcut used for more modern frameworks that utilize regex. For example, in Python, this will work. If you do this in Bash, it will fail. In bash, you will need to stick to doing `[a-zA-Z]` unless there is a way around it.
+
+What this does:
+
+`\w` matches all a word character. Remember, just ONE character.
+Now, putting this in brackets: `[\w]` will allow any kind of word match. For instance, notice how we left one quote escaped outside of a bracket?
+This means that it will capture a __static__ single quote `\'`.
+
+Remember the `+` from earlier? This is used to __continue__ the word finding. Just using `[\w]` will only find one single word character. If we add a plus sign, it will "continue" the capture until a stop is stated. In our case, the single quote `\'` acts as a stop:
+
+```regex
+[\w]+\'
+```
+This will capture every word character, including the single quote and STOP. This is why, we add another `[\w]+` after the single quote
