@@ -1,0 +1,4 @@
+1. Without using any HTML parsers, try parsing the contents of <title> with regex
+2. WIthout using any HTML parsers, try parsing other tags, such as <p> and others.
+3. Use the examples provided from the README.md to grab potential IP addresses, URLs or domains from this source code of google.com
+4. curl one of your favorite web pages that has images on them, and try to grab all the filenames of each image that's found on the website. For example, this site: https://thejohnfox.com/repetition-examples/

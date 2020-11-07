@@ -10,9 +10,15 @@ This repo is a workshop designed for MataHacks 2020
     * [Single and Multiple capturing groups](#single-and-multiple-capturing-groups)
     * [Non-capturing groups](#non-capturing-groups)
     * [Word phrasing](#word-phrasing)
+    * [Sentences with changing data](#Sentences-with-changing-data)
     * [References](#references)
     * [Quantifiers](#quantifiers)
+3. [Advanced Syntax](#Advanced-Syntax)
+    * [Conditional Statements](#conditional-statements)
+    * [Lookahead and Lookbehind](#lookahead-and-lookbehind)
+    * [Flags](#flags)
     * [Some Examples](#some-examples)
+4. [Resources](#Resources)
 
 # Requirements
 Feel free to do this in Python or your favorite language, or just use https://regex101.com
@@ -80,6 +86,20 @@ Remember the `+` from earlier? This is used to __continue__ the word finding. Ju
 ```
 This will capture every word character, including the single quote and STOP. This is why, we add another `[\w]+` after the single quote
 
+## Sentences with changing data
+Let's say you have sentences that have changing words in them, but the pattern of the sentence stays the same. For example, CSV data the only the company name changes, or has similar names. Let's say the data looks like this:
+```
+20201001, google, 21, 51, true
+20201001, yahoo, 23, 25, true
+20201001, yandex, 22, 34, true
+```
+
+If you only want to show rows/sentences with google and yahoo, you'd do something like this:
+```regex
+((?:[\d]+,\s)(?:google|yahoo),\s[\d]+,\s[\d]+,\s[\w]+)
+```
+A really un-optimized, but it gathers only the rows that have google and yahoo in them.
+
 ![capture001](/res/capture001.PNG)
 
 
@@ -111,6 +131,34 @@ Notice how there are limits set with quote separation in the quantifier. You can
 
 This will capture 5 characters ONLY
 
+
+# Advanced Syntax
+## Conditional statements
+
+Think of conditional statements as if else statements in regular programming, but in this case, it's a bit different. It either captures the left side or the right. The left one is captured if the statement is true. If not, it captures the right.
+
+Here is a good example of this working correclty:
+https://regex101.com/r/dS1dG4/1
+
+The way this is supposed to work is that you have a conditional at
+```regex
+(?=<pattern>)<truepatter>|<falsepattern>
+```
+So, in the sense of, if it succeeds, it will do the true pattern, if it fails, it will do the false patterh. But this is easily countered via software. You can do this in your software to minimize debugging, but in the end, if you wish to do it via regex, crafting the query shouldn't be that bad if you have specific type of data that you want to grab.
+
+This example was found from this thread: https://stackoverflow.com/questions/39222950/regular-expression-with-if-condition
+
+## Lookahead and Lookbehind
+Lookaheads are similar to regular conditional statements. Lookbehinds are different. They check the previous character and start matching your pattern after the character or pattern you stated exists.
+
+There are also negative lookaheads and negative lookbehinds.
+
+Regular lookbehinds are as follows: `(?<=pattern)pattern` Negatives lookbehinds are `(?<!pattern)pattern`
+
+
+## Flags
+Before moving to advanced Regex, let's talk about flags. One of the flags you'd use a lot is the Global flag (g) check out the options in https://regex101.com/ in your bar, there's a drop down menu where you can select what other flags to select. This is also available in Python as well, for example. You don't really need to use some other flag randomly out of nowhere, because usually, the global flag works just fine in a lot of cases. Read more about them here: http://xregexp.com/flags/
+
 ## Some examples
 Here are some Regex queries that I have created:
 
@@ -121,7 +169,7 @@ This one finds IP addresses:
 
 This one finds email addresses:
 ```regex
-\b([\w\.\_\-\d]+\S+\@\S+[\w\.\-\dd]+\S+\.\S+[a-zA-Z]{1,7})\b
+\b([\w\.\_\-\d]+\S+\@\S+[\w\.\-\d]+\S+\.\S+[a-zA-Z]{1,7})\b
 ```
 
 These ones finds hashes:
@@ -142,7 +190,12 @@ This one grabs URLs:
 \b((?:(?:\S+(?:(?:\:\/{2})|(?:\.[\w]+[\/].+?)))(?:[\w\d\.\[\]\_\/\-\?\&\;\=\:]+)))\b
 ```
 
-This one grabs Domains:
+This one grabs Domains. Ignoring the trailing file, and ignoring the protocol.
 ```regex
 \b((?<!\w\/)[\w\d\-\.]{0,61}\S\.\S[a-zA-Z]{1,7})\b
 ```
+
+# Resources
+* https://www.regular-expressions.info/
+* https://regex101.com/
+* https://www.rexegg.com/
