@@ -6,6 +6,8 @@ This repo is a workshop designed for MataHacks 2020
 
 # Content
 1. [Requirements](#Requirements)
+2. [Regex basics: Syntax](#Regex basics: Syntax)
+    a. [Single and Multiple capturing groups](#Single and Multiple capturing groups)
 
 # Requirements
 Feel free to do this in Python or your favorite language, or just use https://regex101.com
