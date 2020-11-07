@@ -44,4 +44,16 @@ Note, this is a bit excessive, since there's two non-capturing groups and new co
 In transition, let's dive into matching letters, numbers and special characters.
 
 ## Word phrasing
-
+From the regex search above:
+```regex
+(
+ (?:
+  [\w]+
+ )
+ \'
+ (?:
+  [\w]+
+ )
+)
+```
+We can see that `\w` is used. This is basically doing the same thing as `[a-zA-Z]` it is a shortcut used for more modern frameworks that utilize regex. For example, in Python, this will work. If you do this in Bash, it will fail. In bash, you will need to stick to doing `[a-zA-Z]` unless there is a way around it.
