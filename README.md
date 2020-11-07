@@ -70,3 +70,12 @@ Remember the `+` from earlier? This is used to __continue__ the word finding. Ju
 [\w]+\'
 ```
 This will capture every word character, including the single quote and STOP. This is why, we add another `[\w]+` after the single quote
+
+![capture001](/res/capture001.PNG)
+
+
+Moving on, there are several other ways to capture:
+```regex
+[0-9] = [\d]
+```
+
