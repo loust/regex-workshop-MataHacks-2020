@@ -12,6 +12,7 @@ This repo is a workshop designed for MataHacks 2020
     * [Word phrasing](#word-phrasing)
     * [References](#references)
     * [Quantifiers](#quantifiers)
+    * [Some Examples](#some-examples)
 
 # Requirements
 Feel free to do this in Python or your favorite language, or just use https://regex101.com
@@ -84,6 +85,7 @@ This will capture every word character, including the single quote and STOP. Thi
 
 Moving on, there are several other ways to capture, for example digits
 ## References
+These are basic word tokens.
 ```
 [a-zA-Z] = [\w]
 Anything that is NOT a word character = [\W]
@@ -108,3 +110,39 @@ Notice how there are limits set with quote separation in the quantifier. You can
 ```
 
 This will capture 5 characters ONLY
+
+## Some examples
+Here are some Regex queries that I have created:
+
+This one finds IP addresses:
+```regex
+((?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]))
+```
+
+This one finds email addresses:
+```regex
+\b([\w\.\_\-\d]+\S+\@\S+[\w\.\-\dd]+\S+\.\S+[a-zA-Z]{1,7})\b
+```
+
+These ones finds hashes:
+```regex
+Generic: \b[A-Fa-f0-9]{32}\b|\b[A-Fa-f0-9]{40}\b|\b[A-Fa-f0-9]{64}\b
+MD5: \b([A-Fa-f0-9]{32})\b
+SHA1: \b[A-Fa-f0-9]{40}\b
+SHA256: \b[A-Fa-f0-9]{64}\b
+```
+
+This one grabs URLs:
+```regex
+\b((?<!\w\/)[\w\d\-\.]{0,61}\S\.\S[a-zA-Z]{1,7})\b
+```
+
+This one grabs URLs:
+```regex
+\b((?:(?:\S+(?:(?:\:\/{2})|(?:\.[\w]+[\/].+?)))(?:[\w\d\.\[\]\_\/\-\?\&\;\=\:]+)))\b
+```
+
+This one grabs Domains:
+```regex
+\b((?<!\w\/)[\w\d\-\.]{0,61}\S\.\S[a-zA-Z]{1,7})\b
+```
